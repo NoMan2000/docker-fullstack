@@ -1,0 +1,19 @@
+{
+  "name": "fibbonaci",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "private",
+  "dependencies": {
+    "nodemon": "^2.0.2",
+    "redis": "^3.0.2"
+  },
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "dev": "tsc && nodemon dist/index.js"
+  },
+  "devDependencies": {
+    "@types/redis": "^2.8.16",
+    "tslint": "^6.0.0",
+    "typescript": "^3.8.3"
+  }
+}
