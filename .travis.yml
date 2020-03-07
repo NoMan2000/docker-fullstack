@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+language: generic
+
+before_install:
+  - docker build -t noman2000/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true noman2000/react-test yarn test
+
+after_success:
+  - docker build -t noman2000/multi-client ./client
+  - docker build -t noman2000/multi-nginx ./nginx
+  - docker build -t noman2000/multi-server ./server
+  - docker build -t noman2000/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD"  docker login -u "$DOCKER_ID" --password-stdin
+  - docker push noman2000/multi-client
+  - docker push noman2000/multi-nginx
+  - docker push noman2000/multi-server
+  - docker push noman2000/multi-worker
